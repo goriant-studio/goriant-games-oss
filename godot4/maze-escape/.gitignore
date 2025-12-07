@@ -1,3 +1,47 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+########################
+# GODOT
+########################
+# Imported assets
+.import/
+
+# Godot compiled cache
+.godot/
+
+# Mono / C#
+.mono/
+data_*/
+*.mono/
+
+########################
+# C# / DOTNET
+########################
+bin/
+obj/
+*.suo
+*.user
+*.userprefs
+
+########################
+# RIDER / RESHARPER
+########################
+.idea/
+*.DotSettings.user
+*.DotSettings
+*.csproj.DotSettings
+_ReSharper.Caches/
+_ReSharper.*
+*.resharper
+resharper/
+JetBrains.ReSharper.*
+
+########################
+# OS / EDITOR GARBAGE
+########################
+Thumbs.db
+.DS_Store
+*.swp
+*.tmp
