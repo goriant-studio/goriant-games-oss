@@ -1,0 +1,3 @@
+FPS = 60
+TILE = 70
+PLAYER_SIZE = 65
