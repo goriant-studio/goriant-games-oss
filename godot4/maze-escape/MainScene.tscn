@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp1joe6eqyhfn"]
+
+[ext_resource type="Script" uid="uid://d2knp11mkt75u" path="res://MainMenu.cs" id="1_3mqji"]
+
+[node name="Main Scene" type="Node2D"]
+
+[node name="MenuLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("StartButton", "QuitButton")]
+layer = 100
+script = ExtResource("1_3mqji")
+StartButton = NodePath("BtnStart")
+QuitButton = NodePath("BtnQuit")
+
+[node name="LabelGame" type="Label" parent="MenuLayer"]
+custom_minimum_size = Vector2(0, 60)
+offset_left = 130.0
+offset_top = 150.0
+offset_right = 786.0
+offset_bottom = 287.0
+theme_override_font_sizes/font_size = 100
+text = "MAZE ESCAPE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnStart" type="Button" parent="MenuLayer"]
+custom_minimum_size = Vector2(0, 60)
+offset_left = 800.0
+offset_top = 425.0
+offset_right = 1767.0
+offset_bottom = 638.0
+theme_override_font_sizes/font_size = 150
+text = "START"
+
+[node name="BtnQuit" type="Button" parent="MenuLayer"]
+custom_minimum_size = Vector2(0, 60)
+offset_left = 800.0
+offset_top = 750.0
+offset_right = 1767.0
+offset_bottom = 963.0
+theme_override_font_sizes/font_size = 150
+text = "QUIT
+"
