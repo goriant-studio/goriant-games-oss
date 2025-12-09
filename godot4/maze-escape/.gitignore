@@ -1,47 +1,32 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
+# Godot 4 project (GDScript only)
 
-########################
-# GODOT
-########################
-# Imported assets
+# Auto-generated folders
 .import/
-
-# Godot compiled cache
+.export/
 .godot/
 
-# Mono / C#
-.mono/
-data_*/
-*.mono/
+# Do NOT ignore .import files (metadata)
+# Do NOT ignore .uid files (important!)
 
-########################
-# C# / DOTNET
-########################
+# Temporary files
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+logs/
+*.log
+
+# C# leftover (if any)
+.mono/
 bin/
 obj/
-*.suo
-*.user
-*.userprefs
-
-########################
-# RIDER / RESHARPER
-########################
-.idea/
-*.DotSettings.user
-*.DotSettings
-*.csproj.DotSettings
-_ReSharper.Caches/
-_ReSharper.*
-*.resharper
-resharper/
-JetBrains.ReSharper.*
-
-########################
-# OS / EDITOR GARBAGE
-########################
-Thumbs.db
-.DS_Store
-*.swp
-*.tmp
+*.csproj
+*.sln
