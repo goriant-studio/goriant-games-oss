@@ -1,6 +1,14 @@
+# player.gd
 extends CharacterBody2D
 
-@export var speed: float = 150.0
+@export var speed: float = 250.0
+
+# Optional: reference đến Maze nếu main gán vào
+var maze: Node2D
+
+func set_maze(m):
+	maze = m
+
 
 func _physics_process(delta: float) -> void:
 	var input_vector := Vector2.ZERO

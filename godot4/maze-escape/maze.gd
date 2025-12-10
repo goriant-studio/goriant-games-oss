@@ -1,28 +1,34 @@
 extends Node2D
 
-# Fit maze height to 1080p screen (10 rows → 108px each)
-@export var tile_size: int = 108
+# Fit maze height to 1080p screen (30 cols -> 16 rows → 64px each)
+@export var tile_size: int = 64
 
 var walls_parent: Node2D
 var wall_texture: Texture2D
 
-var maze_10x10 = [
-	[1,1,1,1,1,1,1,1,1,1],
-	[1,0,0,1,0,0,0,0,0,1],
-	[1,0,1,1,0,1,1,1,0,1],
-	[1,0,1,0,0,1,0,1,0,1],
-	[1,0,1,0,1,1,0,1,0,1],
-	[1,0,0,0,0,0,0,1,0,1],
-	[1,1,1,1,1,1,0,1,0,1],
-	[1,0,0,0,0,0,0,1,0,1],
-	[1,0,1,1,1,1,1,1,0,1],
-	[1,1,1,1,1,1,1,1,1,1],
+var maze_30x16 := [
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+	[1,0,0,0,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1],
+	[1,0,1,0,1,0,1,0,1,1,0,1,0,1,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0,1],
+	[1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,0,1],
+	[1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1],
+	[1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1],
+	[1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1,0,1],
+	[1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,1],
+	[1,0,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,0,1,0,1],
+	[1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1],
+	[1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
 
 func _ready():
-	# Auto-center maze based on screen size
-	_center_maze()
+	# Draw maze at beginning
+	position = Vector2(0,0)
 
 	# Create parent for walls
 	walls_parent = get_node_or_null("Walls")
@@ -35,18 +41,7 @@ func _ready():
 	wall_texture = create_solid_color_texture(tile_size, tile_size, Color.BLACK)
 
 	# Build maze
-	generate_walls(maze_10x10)
-
-
-func _center_maze():
-	var screen_size = get_viewport_rect().size
-	var maze_size = tile_size * 10  # 10x10 maze
-
-	# Center inside the screen
-	position = Vector2(
-		(screen_size.x - maze_size) / 2,
-		(screen_size.y - maze_size) / 2
-	)
+	generate_walls(maze_30x16)	
 
 
 func generate_walls(grid):
@@ -89,3 +84,12 @@ func create_solid_color_texture(width: int, height: int, color: Color) -> Textur
 	var img := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	img.fill(color)  # faster than set_pixel loops
 	return ImageTexture.create_from_image(img)
+	
+	
+func cell_to_world(cell: Vector2i) -> Vector2:
+	return Vector2(
+		cell.x * tile_size + tile_size * 0.5,
+		cell.y * tile_size + tile_size * 0.5
+	)
+	
+	

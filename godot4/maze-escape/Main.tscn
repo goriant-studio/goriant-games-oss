@@ -1,26 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch28stkxa6veq"]
+[gd_scene load_steps=3 format=3 uid="uid://ch28stkxa6veq"]
 
-[ext_resource type="Script" uid="uid://gqoyllks8mki" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://dxdnt2gd0cvfo" path="res://assets/main.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ctl44mga11lc7" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://cg3imn3cdy1rx" path="res://maze.gd" id="3_h2yge"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xm2m"]
-radius = 28.0
-height = 76.0
-
 [node name="MainGame" type="Node2D"]
-
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(286, 287)
 script = ExtResource("1_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-0.60000306, -4.399994)
-scale = Vector2(0.1, 0.11)
-texture = ExtResource("1_ig7tw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_0xm2m")
 
 [node name="Maze" type="Node2D" parent="."]
 script = ExtResource("3_h2yge")
