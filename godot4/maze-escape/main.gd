@@ -1,7 +1,7 @@
 # main.gd
 extends Node2D
 
-const PLAYER_SCENE := preload("res://Player.tscn")
+const PLAYER_SCENE := preload("res://player.tscn")
 
 @onready var maze: Node2D = $Maze
 var player: Node2D
