@@ -1,8 +1,5 @@
 extends Node2D
 
-# Fit maze height to 1080p screen (30 cols -> 16 rows → 64px each)
-@export var tile_size: int = 64
-
 var walls_parent: Node2D
 var wall_texture: Texture2D
 
@@ -38,7 +35,7 @@ func _ready():
 		add_child(walls_parent)
 
 	# Create texture for wall tiles
-	wall_texture = create_solid_color_texture(tile_size, tile_size, Color.BLACK)
+	wall_texture = create_solid_color_texture(Globals.tile_size, Globals.tile_size, Color.BLACK)
 
 	# Build maze
 	generate_walls(maze_30x16)	
@@ -60,8 +57,8 @@ func generate_walls(grid):
 
 func create_wall(col: int, row: int):
 	var pos := Vector2(
-		col * tile_size + tile_size / 2.0,
-		row * tile_size + tile_size / 2.0
+		col * Globals.tile_size + Globals.tile_size / 2.0,
+		row * Globals.tile_size + Globals.tile_size / 2.0
 	)
 
 	var wall := StaticBody2D.new()
@@ -69,7 +66,7 @@ func create_wall(col: int, row: int):
 
 	var shape := CollisionShape2D.new()
 	var rect := RectangleShape2D.new()
-	rect.size = Vector2(tile_size, tile_size)
+	rect.size = Vector2(Globals.tile_size, Globals.tile_size)
 	shape.shape = rect
 
 	var sprite := Sprite2D.new()
@@ -77,6 +74,10 @@ func create_wall(col: int, row: int):
 
 	wall.add_child(shape)
 	wall.add_child(sprite)
+	# set collision & mask
+	wall.collision_layer = 1
+	wall.collision_mask = 0
+	
 	walls_parent.add_child(wall)
 
 
@@ -88,8 +89,8 @@ func create_solid_color_texture(width: int, height: int, color: Color) -> Textur
 	
 func cell_to_world(cell: Vector2i) -> Vector2:
 	return Vector2(
-		cell.x * tile_size + tile_size * 0.5,
-		cell.y * tile_size + tile_size * 0.5
+		cell.x * Globals.tile_size + Globals.tile_size * 0.5,
+		cell.y * Globals.tile_size + Globals.tile_size * 0.5
 	)
 	
 	
