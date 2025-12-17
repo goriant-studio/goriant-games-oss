@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8g8d10tvfk8e"]
+
+[ext_resource type="Script" uid="uid://b10d6gum6fyus" path="res://scripts/treasure.gd" id="1_it12x"]
+[ext_resource type="Texture2D" uid="uid://df6s2s4m3gc00" path="res://assets/treasure.png" id="2_0g4qu"]
+[ext_resource type="AudioStream" uid="uid://cqisllxcevyen" path="res://assets/audio/won.wav" id="3_0g4qu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dubxd"]
+size = Vector2(1000.00024, 1000.00037)
+
+[node name="Treasure" type="Area2D"]
+scale = Vector2(0.05, 0.05)
+collision_layer = 8
+script = ExtResource("1_it12x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0g4qu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.768371e-05, -2.384185e-06)
+scale = Vector2(0.9999994, 0.9999994)
+shape = SubResource("RectangleShape2D_dubxd")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0g4qu")
+volume_db = 10.0

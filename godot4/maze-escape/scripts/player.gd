@@ -12,6 +12,10 @@ func set_maze(m):
 
 func _physics_process(_delta: float) -> void:
 	var input_vector := Vector2.ZERO
+	
+	# win or lose - stop moving
+	if Globals.game_state != Globals.GameState.PLAYING:
+		return
 
 	if Input.is_action_pressed("move_left"):
 		input_vector.x -= 1

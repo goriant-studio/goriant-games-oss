@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch28stkxa6veq"]
+
+[ext_resource type="Script" uid="uid://ctl44mga11lc7" path="res://scripts/main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cg3imn3cdy1rx" path="res://scripts/maze.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dfg4ty5cm8ths" path="res://scenes/fullscreen_button.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d23hdvhnwauum" path="res://scenes/game_ui.tscn" id="4_1bvp3"]
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Maze" type="Node2D" parent="."]
+script = ExtResource("2_h2yge")
+
+[node name="FullscreenButton" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="GameUI" parent="." instance=ExtResource("4_1bvp3")]

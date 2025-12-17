@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://d23hdvhnwauum"]
+
+[ext_resource type="Script" uid="uid://baaibb7yce8l0" path="res://scripts/game_ui.gd" id="1_ue6oa"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_ue6oa")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 480.0
+offset_top = 300.0
+offset_right = 1359.0
+offset_bottom = 747.0
+
+[node name="MessageLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 110.0
+offset_right = 532.0
+offset_bottom = 245.0
+theme_override_font_sizes/font_size = 80
+text = "You Win"
+
+[node name="RestartButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07394765
+anchor_top = 0.56823266
+anchor_right = 0.8339022
+anchor_bottom = 0.89261746
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Restart Game"
+metadata/_edit_use_anchors_ = true
+
+[node name="NextButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Next Level"
