@@ -10,5 +10,5 @@ func _ready():
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		sfx.play()
-		emit_signal("collected")
+		collected.emit()
 		queue_free()
