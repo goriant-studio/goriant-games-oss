@@ -16,7 +16,7 @@ func _ready() -> void:
 		push_error("Quit button is not assigned")
 		
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://scenes/main.tscn")		
+	get_tree().change_scene_to_file("res://scenes/level/level_1.tscn")		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

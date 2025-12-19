@@ -2,9 +2,11 @@ extends CanvasLayer
 
 @onready var label = $Panel/MessageLabel
 @onready var restart_btn = $Panel/RestartButton
-@onready var next_btn = $Panel/NextButton # thêm nút này
+@onready var next_btn = $Panel/NextButton
 
 func _ready():
+	# ⭐️ QUAN TRỌNG NHẤT
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Panel_hide()
 	restart_btn.pressed.connect(_on_restart_pressed)
 	next_btn.pressed.connect(_on_next_pressed)
@@ -32,11 +34,13 @@ func Panel_hide():
 	$Panel.visible = false
 
 func _on_restart_pressed():
+	print("RESTART CLICKED") # 👈 debug
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
 	get_tree().reload_current_scene()
 
 func _on_next_pressed():
+	print("NEXT LEVEL") # 👈 debug
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
-	get_tree().change_scene_to_file("res://scenes/level_2.tscn")
+	Globals.go_to_next_level()

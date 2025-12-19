@@ -36,17 +36,18 @@ func spawn_treasure():
 
 	entities.add_child(treasure) # thêm vào Entities, không bị maze che
 
-	var world_pos = maze.cell_to_world(Vector2i(29,14))
-	#var world_pos = maze.cell_to_world(Vector2i(1,2))
+	#var world_pos = maze.cell_to_world(Vector2i(29,14))
+	var world_pos = maze.cell_to_world(Vector2i(1,2))
 	treasure.global_position = world_pos
 	treasure.collected.connect(_on_level_win)
 	
-	
 
 func _on_level_win():
+	if Globals.game_state != Globals.GameState.PLAYING:
+		return
 	MusicManager.stop()
 	Globals.game_state = Globals.GameState.WIN
-	win_popup.show_popup()	
+
 	
 
 func spawn_player_at(cell: Vector2i):
