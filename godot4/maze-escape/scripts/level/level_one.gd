@@ -16,29 +16,21 @@ func _ready():
 	Globals.game_state = Globals.GameState.PLAYING
 
 	MusicManager.play(preload("res://assets/audio/scary.mp3"))
-
-	spawn_player_at(Vector2i(1, 1))
 	spawn_treasure()
 
 	# Spawn enemies
 	spawn_enemy(ENEMY.new("res://assets/enemy1.png", Vector2i(5, 5), ENEMY.PatrolMode.HORIZONTAL, 150))
 	spawn_enemy(ENEMY.new("res://assets/enemy2.png", Vector2i(10, 4), ENEMY.PatrolMode.VERTICAL, 180))
 	spawn_enemy(ENEMY.new("res://assets/enemy3.png", Vector2i(12, 11), ENEMY.PatrolMode.HORIZONTAL, 150))
+	spawn_player_at(Vector2i(1, 1))
 
 func spawn_treasure():
 	treasure = TREASURE_SCENE.instantiate()
 	entities.add_child(treasure)
 
-	var world_pos = maze.cell_to_world(Vector2i(1, 2))
+	var world_pos = maze.cell_to_world(Vector2i(1, 3))
 	treasure.global_position = world_pos
-	treasure.collected.connect(_on_level_win)
 
-func _on_level_win():
-	if Globals.game_state != Globals.GameState.PLAYING:
-		return
-
-	MusicManager.stop()
-	Globals.game_state = Globals.GameState.WIN
 
 func spawn_player_at(cell: Vector2i):
 	player = PLAYER_SCENE.instantiate()

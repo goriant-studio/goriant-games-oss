@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dubxd"]
 size = Vector2(1000.00024, 1000.00037)
 
-[node name="Treasure" type="Area2D"]
+[node name="Treasure" type="Area2D" groups=["treasure"]]
 scale = Vector2(0.05, 0.05)
 collision_layer = 8
 script = ExtResource("1_it12x")

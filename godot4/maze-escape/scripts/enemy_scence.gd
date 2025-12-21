@@ -12,16 +12,46 @@ enum PatrolMode { HORIZONTAL, VERTICAL }
 
 # --------- REQUIRED NODES ----------
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var hitbox: Area2D = $Hitbox
+@onready var collision: CollisionShape2D = $Hitbox/CollisionShape2D
 
 var direction := -1
+var has_hit_player := false
+var hit_sfx: AudioStreamPlayer2D
 
 func _ready():
 	assert(sprite != null, "Enemy requires Sprite2D")
 	assert(collision != null, "Enemy requires CollisionShape2D")
-
+	_init_hit_sfx()
+	MusicManager.play(preload("res://assets/audio/scary.mp3"))
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	apply_sprite()
 	setup_collision()
+	
+	
+func _on_hitbox_body_entered(body: Node2D):
+	if Globals.game_state != Globals.GameState.PLAYING:
+		return
+		
+	if body.is_in_group("player") and not has_hit_player:
+		if has_hit_player:
+			return
+		has_hit_player = true
+		
+		if hit_sfx:
+			print("Hit sfx existsd")
+			hit_sfx.play()
+			await hit_sfx.finished
+			
+		MusicManager.stop()
+		Globals.game_state = Globals.GameState.LOSE
+		
+
+
+func _init_hit_sfx():
+	hit_sfx = AudioStreamPlayer2D.new()
+	hit_sfx.stream = preload("res://assets/audio/enemy-hit.wav")
+	add_child(hit_sfx)
 
 func apply_sprite():
 	assert(sprite_texture != null, "Enemy sprite_texture is required")
@@ -38,7 +68,8 @@ func setup_collision():
 	collision_mask = 2
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
+
 	velocity = Vector2.ZERO
 
 	var start_pos = patrol_start * Globals.tile_size

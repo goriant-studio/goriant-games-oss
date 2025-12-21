@@ -80,7 +80,7 @@ func _physics_process(_delta):
 			
 			MusicManager.stop()
 			velocity = Vector2.ZERO
-			Globals.game_state = Globals.GameState.LOSE
+			Globals.emit_player_died()
 			return
 	
 	velocity = Vector2.ZERO

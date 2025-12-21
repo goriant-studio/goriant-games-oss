@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var label = $Panel/MessageLabel
 @onready var restart_btn = $Panel/RestartButton
-@onready var next_btn = $Panel/NextButton
+@onready var next_btn : Button = $Panel/NextButton
 
 func _ready():
 	# ⭐️ QUAN TRỌNG NHẤT
@@ -16,6 +16,10 @@ func _on_game_state_changed(state):
 	match state:
 		Globals.GameState.WIN:
 			show_message("🎉 YOU WIN!")
+			print("Globals.beat_the_game()" + str(Globals.beat_the_game()))
+			if Globals.beat_the_game():
+				next_btn.text = "You beat the game!!!"
+				next_btn.add_theme_font_size_override("font_size", 80)
 			next_btn.show()
 			restart_btn.hide()
 			get_tree().paused = true
