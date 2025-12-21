@@ -23,7 +23,6 @@ func _ready():
 	assert(sprite != null, "Enemy requires Sprite2D")
 	assert(collision != null, "Enemy requires CollisionShape2D")
 	_init_hit_sfx()
-	MusicManager.play(preload("res://assets/audio/scary.mp3"))
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	apply_sprite()
 	setup_collision()
@@ -42,8 +41,6 @@ func _on_hitbox_body_entered(body: Node2D):
 			print("Hit sfx existsd")
 			hit_sfx.play()
 			await hit_sfx.finished
-			
-		MusicManager.stop()
 		Globals.game_state = Globals.GameState.LOSE
 		
 

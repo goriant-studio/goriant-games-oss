@@ -17,12 +17,14 @@ var hit_sfx: AudioStreamPlayer2D
 var has_hit_player := false
 
 
-func _init(_sprite_path:String, 
-		_spawn_at : Vector2i, 
-		_patrol_mode:PatrolMode, 
-		_speed := 50, 
-		_patrol_start := 2, 
-		_patrol_end := 10):
+func _init(
+	_sprite_path: String = "",
+	_spawn_at: Vector2i = Vector2i.ZERO,
+	_patrol_mode: PatrolMode = PatrolMode.HORIZONTAL,
+	_speed: float = 50.0,
+	_patrol_start: int = 2,
+	_patrol_end: int = 10
+):
 	sprite_path = _sprite_path
 	spawn_at = _spawn_at
 	patrol_mode = _patrol_mode

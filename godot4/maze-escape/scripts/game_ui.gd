@@ -48,3 +48,6 @@ func _on_next_pressed():
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
 	Globals.go_to_next_level()
+	MusicManager.unlock_audio()
+	MusicManager.play(preload("res://assets/audio/scary.mp3"))
+	

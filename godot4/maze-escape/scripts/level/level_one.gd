@@ -15,7 +15,6 @@ func _ready():
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
 
-	MusicManager.play(preload("res://assets/audio/scary.mp3"))
 	spawn_treasure()
 
 	# Spawn enemies
