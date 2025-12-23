@@ -16,9 +16,8 @@ func _ready() -> void:
 		push_error("Quit button is not assigned")
 		
 func _on_start_pressed():
-	MusicManager.unlock_audio()
-	MusicManager.play(preload("res://assets/audio/scary.mp3"))
-	get_tree().change_scene_to_file("res://scenes/level/level_1.tscn")		
+	Globals.game_state = Globals.GameState.PLAYING
+	get_tree().change_scene_to_file("res://scenes/level/level_1.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

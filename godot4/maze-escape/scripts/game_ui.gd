@@ -38,16 +38,14 @@ func Panel_hide():
 	$Panel.visible = false
 
 func _on_restart_pressed():
-	print("RESTART CLICKED") # 👈 debug
+	MusicManager.unlock_audio() # 👈 web unlock
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
 	get_tree().reload_current_scene()
 
 func _on_next_pressed():
-	print("NEXT LEVEL") # 👈 debug
+	MusicManager.unlock_audio() # 👈 web unlock
 	get_tree().paused = false
 	Globals.game_state = Globals.GameState.PLAYING
 	Globals.go_to_next_level()
-	MusicManager.unlock_audio()
-	MusicManager.play(preload("res://assets/audio/scary.mp3"))
 	

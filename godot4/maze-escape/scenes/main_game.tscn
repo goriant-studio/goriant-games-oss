@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi5vfb05t4ry8"]
+[gd_scene load_steps=6 format=3 uid="uid://bi5vfb05t4ry8"]
 
 [ext_resource type="Script" uid="uid://bv2340k18qvq1" path="res://scripts/main_menu.gd" id="1_1oj5k"]
+[ext_resource type="Script" uid="uid://ciot4n3hfgggx" path="res://scripts/game_manager.gd" id="1_ipu61"]
+[ext_resource type="AudioStream" uid="uid://b4n2wlc88ubnj" path="res://assets/audio/scary.mp3" id="2_ygxny"]
+[ext_resource type="AudioStream" uid="uid://cqisllxcevyen" path="res://assets/audio/won.wav" id="3_wi4c7"]
+[ext_resource type="AudioStream" uid="uid://b752neakdex0s" path="res://assets/audio/enemy-hit.wav" id="4_70vka"]
 
 [node name="MainGame" type="Node2D"]
+script = ExtResource("1_ipu61")
+gameplay_bgm = ExtResource("2_ygxny")
+win_bgm = ExtResource("3_wi4c7")
+lose_bgm = ExtResource("4_70vka")
 
 [node name="MainMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("start_btn", "quit_btn")]
 script = ExtResource("1_1oj5k")

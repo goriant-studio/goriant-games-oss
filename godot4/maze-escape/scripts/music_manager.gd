@@ -7,14 +7,17 @@ var bgm: AudioStreamPlayer
 var audio_unlocked := false
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	bgm = AudioStreamPlayer.new()
 	bgm.bus = MUSIC_BUS_NAME
 	bgm.volume_db = DEFAULT_VOLUME_DB
+	bgm.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(bgm)
 
-	print("✅ MusicManager ready (Godot 4.5)")
+	print("✅ MusicManager ready (Godot 4.5 / Web safe)")
 
-# ⭐️ Chỉ là FLAG logic – không gọi AudioServer.resume()
+# ⭐️ Gọi từ button / click đầu tiên của user
 func unlock_audio():
 	if audio_unlocked:
 		return
@@ -30,6 +33,10 @@ func play(stream: AudioStream, loop := true):
 		print("⛔ Audio locked (waiting for user interaction)")
 		return
 
+	# Prevent restart same music
+	if bgm.stream == stream and bgm.playing:
+		return
+
 	# Loop config (Godot 4.5)
 	if stream is AudioStreamMP3:
 		stream.loop = loop
@@ -42,8 +49,10 @@ func play(stream: AudioStream, loop := true):
 			else AudioStreamWAV.LOOP_DISABLED
 		)
 
+	bgm.stop()
 	bgm.stream = stream
 	bgm.play()
+
 	print("🎵 Playing:", stream.resource_path)
 
 func stop():

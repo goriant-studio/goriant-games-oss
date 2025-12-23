@@ -40,7 +40,6 @@ func _on_hitbox_body_entered(body: Node2D):
 		if hit_sfx:
 			print("Hit sfx existsd")
 			hit_sfx.play()
-			await hit_sfx.finished
 		Globals.game_state = Globals.GameState.LOSE
 		
 
@@ -48,6 +47,7 @@ func _on_hitbox_body_entered(body: Node2D):
 func _init_hit_sfx():
 	hit_sfx = AudioStreamPlayer2D.new()
 	hit_sfx.stream = preload("res://assets/audio/enemy-hit.wav")
+	hit_sfx.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(hit_sfx)
 
 func apply_sprite():
@@ -71,7 +71,7 @@ func _physics_process(_delta):
 
 	var start_pos = patrol_start * Globals.tile_size
 	var end_pos = patrol_end * Globals.tile_size
-
+	
 	match patrol_mode:
 		PatrolMode.HORIZONTAL:
 			velocity.x = direction * speed
