@@ -1,6 +1,8 @@
 extends Node
 
-const MUSIC_BUS_NAME := "Music"
+signal audio_ready
+
+const MUSIC_BUS_NAME := "Master"
 const DEFAULT_VOLUME_DB := 0.0
 
 var bgm: AudioStreamPlayer
@@ -15,9 +17,8 @@ func _ready():
 	bgm.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(bgm)
 
-	print("✅ MusicManager ready (Godot 4.5 / Web safe)")
+	print("✅ MusicManager ready (Godot 4.5 Web-safe)")
 
-# ⭐️ Gọi từ button / click đầu tiên của user
 func unlock_audio():
 	if audio_unlocked:
 		return
@@ -25,19 +26,21 @@ func unlock_audio():
 	audio_unlocked = true
 	print("🔓 Audio unlocked by user interaction")
 
+	# 🚨 KHÔNG gọi AudioServer.resume() trong Godot 4
+	audio_ready.emit()
+
 func play(stream: AudioStream, loop := true):
+	if not audio_unlocked:
+		print("⛔ play() called before audio unlocked")
+		return
+
 	if stream == null:
 		return
 
-	if not audio_unlocked:
-		print("⛔ Audio locked (waiting for user interaction)")
-		return
-
-	# Prevent restart same music
 	if bgm.stream == stream and bgm.playing:
 		return
 
-	# Loop config (Godot 4.5)
+	# Loop config (Godot 4 compatible)
 	if stream is AudioStreamMP3:
 		stream.loop = loop
 	elif stream is AudioStreamOggVorbis:
@@ -54,10 +57,3 @@ func play(stream: AudioStream, loop := true):
 	bgm.play()
 
 	print("🎵 Playing:", stream.resource_path)
-
-func stop():
-	if bgm.playing:
-		bgm.stop()
-
-func set_volume(db: float):
-	bgm.volume_db = db

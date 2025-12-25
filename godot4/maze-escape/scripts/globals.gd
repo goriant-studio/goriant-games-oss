@@ -1,6 +1,6 @@
 extends Node
 
-enum GameState { PLAYING, WIN, LOSE }
+enum GameState { NONE, PLAYING, WIN, LOSE }
 
 signal game_state_changed(state)
 signal treasure_collected
@@ -22,13 +22,16 @@ var levels := [
 
 var current_level_index := 0
 var is_changing_level := false
+var game_state := GameState.PLAYING
 
-var game_state: GameState = GameState.PLAYING:
-	set(value):
-		if game_state == value:
-			return
-		game_state = value
-		emit_signal("game_state_changed", value)
+func set_game_state(state: GameState):
+	if game_state == state:
+		return
+
+	game_state = state
+	print("🎮 GameState →", GameState.keys()[state])
+	emit_signal("game_state_changed", state)
+
 
 
 func beat_the_game() -> bool:
@@ -42,7 +45,7 @@ func go_to_next_level():
 	is_changing_level = true
 	game_state = GameState.PLAYING
 
-	await get_tree().process_frame # ⭐ cực kỳ quan trọng cho Web
+	await get_tree().process_frame
 
 	var next_index := current_level_index + 1
 	if next_index >= levels.size():

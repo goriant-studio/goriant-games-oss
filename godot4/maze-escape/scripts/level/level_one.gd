@@ -13,7 +13,7 @@ var treasure
 func _ready():
 	# ⭐️ CỰC KỲ QUAN TRỌNG
 	get_tree().paused = false
-	Globals.game_state = Globals.GameState.PLAYING
+	Globals.set_game_state(Globals.GameState.PLAYING)
 
 	spawn_treasure()
 

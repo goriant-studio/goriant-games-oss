@@ -16,7 +16,8 @@ func _ready() -> void:
 		push_error("Quit button is not assigned")
 		
 func _on_start_pressed():
-	Globals.game_state = Globals.GameState.PLAYING
+	MusicManager.unlock_audio()
+	Globals.set_game_state(Globals.GameState.PLAYING)
 	get_tree().change_scene_to_file("res://scenes/level/level_1.tscn")
 
 

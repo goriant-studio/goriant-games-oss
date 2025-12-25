@@ -40,7 +40,7 @@ func _on_hitbox_body_entered(body: Node2D):
 		if hit_sfx:
 			print("Hit sfx existsd")
 			hit_sfx.play()
-		Globals.game_state = Globals.GameState.LOSE
+		Globals.set_game_state(Globals.GameState.LOSE)
 		
 
 
