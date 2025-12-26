@@ -23,6 +23,10 @@ var direction: int = -1
 var has_hit_player: bool = false
 var hit_sfx: AudioStreamPlayer2D
 
+var spawn_position: Vector2
+var start_world_pos: Vector2
+var end_world_pos: Vector2
+
 func _ready() -> void:
 	assert(sprite != null, "Enemy requires Sprite2D")
 	assert(hitbox != null, "Enemy requires Hitbox (Area2D)")
@@ -35,6 +39,18 @@ func _ready() -> void:
 		hitbox.area_entered.connect(_on_hitbox_area_entered)
 	apply_sprite()
 	setup_collision()
+	
+	spawn_position = global_position
+	
+	# Tính world position từ offset
+	match patrol_mode:
+		PatrolMode.HORIZONTAL:
+			start_world_pos = spawn_position + Vector2(patrol_start * Globals.tile_size, 0)
+			end_world_pos = spawn_position + Vector2(patrol_end * Globals.tile_size, 0)
+		PatrolMode.VERTICAL:
+			start_world_pos = spawn_position + Vector2(0, patrol_start * Globals.tile_size)
+			end_world_pos = spawn_position + Vector2(0, patrol_end * Globals.tile_size)
+
 	
 
 func _on_hitbox_area_entered(body: Node2D) -> void:
@@ -88,23 +104,23 @@ func setup_collision() -> void:
 func _physics_process(_delta: float) -> void:
 	velocity = Vector2.ZERO
 
-	var start_pos := patrol_start * Globals.tile_size
-	var end_pos := patrol_end * Globals.tile_size
+	#var start_pos := patrol_start * Globals.tile_size
+	#var end_pos := patrol_end * Globals.tile_size
 
 	match patrol_mode:
 		PatrolMode.HORIZONTAL:
 			velocity.x = direction * speed
-			if global_position.x <= start_pos:
+			if global_position.x <= start_world_pos.x:
 				direction = 1
-			elif global_position.x >= end_pos:
+			elif global_position.x >= end_world_pos.x:
 				direction = -1
 			sprite.flip_h = direction > 0
-
+			
 		PatrolMode.VERTICAL:
 			velocity.y = direction * speed
-			if global_position.y <= start_pos:
+			if global_position.y <= start_world_pos.y:
 				direction = 1
-			elif global_position.y >= end_pos:
+			elif global_position.y >= end_world_pos.y:
 				direction = -1
 
 	move_and_slide()

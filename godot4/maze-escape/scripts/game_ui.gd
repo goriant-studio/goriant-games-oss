@@ -11,7 +11,11 @@ func _ready():
 	next_btn.pressed.connect(_on_next_pressed)
 	Globals.game_state_changed.connect(_on_game_state_changed)
 	Globals.player_died.connect(_on_player_die)
+	Globals.treasure_collected.connect(_on_treasure_collected)
+	
 
+func _on_treasure_collected():
+	visible = true
 
 func _on_player_die():
 	visible = true

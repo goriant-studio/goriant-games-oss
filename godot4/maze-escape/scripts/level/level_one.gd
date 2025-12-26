@@ -26,7 +26,6 @@ func _ready():
 func spawn_treasure():
 	treasure = TREASURE_SCENE.instantiate()
 	entities.add_child(treasure)
-
 	# var world_pos = maze.cell_to_world(Vector2i(1, 3)) # for test
 	var world_pos = maze.cell_to_world(Vector2i(29, 14))
 	treasure.global_position = world_pos
@@ -35,7 +34,6 @@ func spawn_treasure():
 func spawn_player_at(cell: Vector2i):
 	player = PLAYER_SCENE.instantiate()
 	entities.add_child(player)
-
 	player.global_position = maze.cell_to_world(cell)
 
 func spawn_enemy(enemy):
