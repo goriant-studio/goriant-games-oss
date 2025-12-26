@@ -10,6 +10,11 @@ func _ready():
 	restart_btn.pressed.connect(_on_restart_pressed)
 	next_btn.pressed.connect(_on_next_pressed)
 	Globals.game_state_changed.connect(_on_game_state_changed)
+	Globals.player_died.connect(_on_player_die)
+
+
+func _on_player_die():
+	visible = true
 
 func _on_game_state_changed(state):	
 	match state:

@@ -6,10 +6,10 @@
 script = ExtResource("1_ue6oa")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 480.0
-offset_top = 300.0
-offset_right = 1359.0
-offset_bottom = 747.0
+offset_left = 202.0
+offset_top = 109.0
+offset_right = 1081.0
+offset_bottom = 556.0
 
 [node name="MessageLabel" type="Label" parent="Panel"]
 layout_mode = 0
@@ -27,6 +27,8 @@ anchor_left = 0.07394765
 anchor_top = 0.56823266
 anchor_right = 0.8339022
 anchor_bottom = 0.89261746
+offset_right = 32.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 100
@@ -35,9 +37,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="NextButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 216.0
-offset_right = 792.0
-offset_bottom = 429.0
-theme_override_font_sizes/font_size = 120
+offset_left = 54.0
+offset_top = 257.0
+offset_right = 754.0
+offset_bottom = 407.0
+theme_override_font_sizes/font_size = 100
 text = "Next Level"

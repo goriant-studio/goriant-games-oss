@@ -5,19 +5,20 @@
 [ext_resource type="AudioStream" uid="uid://cqisllxcevyen" path="res://assets/audio/won.wav" id="3_0g4qu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dubxd"]
-size = Vector2(1000.00024, 1000.00037)
+size = Vector2(480.00034, 480.00037)
 
 [node name="Treasure" type="Area2D" groups=["treasure"]]
 scale = Vector2(0.05, 0.05)
-collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_it12x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_0g4qu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4.768371e-05, -2.384185e-06)
-scale = Vector2(0.9999994, 0.9999994)
+position = Vector2(1.4305112e-05, -1.3351423e-05)
+scale = Vector2(0.99999917, 0.99999917)
 shape = SubResource("RectangleShape2D_dubxd")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]

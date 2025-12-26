@@ -7,12 +7,10 @@ var lose_bgm: AudioStream = preload("res://assets/audio/enemy-hit.wav")
 
 var _pending_state := Globals.game_state
 
-func _ready():
-	# Lắng nghe audio ready
+func _enter_tree():
 	if not MusicManager.audio_ready.is_connected(_on_audio_ready):
 		MusicManager.audio_ready.connect(_on_audio_ready)
-
-func _enter_tree():
+		
 	if not Globals.game_state_changed.is_connected(_on_game_state_changed):
 		Globals.game_state_changed.connect(_on_game_state_changed)
 

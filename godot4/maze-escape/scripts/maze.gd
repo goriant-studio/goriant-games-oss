@@ -75,8 +75,7 @@ func create_wall(col: int, row: int):
 	wall.add_child(shape)
 	wall.add_child(sprite)
 	# set collision & mask
-	wall.collision_layer = 2
-	wall.collision_mask = 1
+	wall.collision_layer = 1
 	
 	walls_parent.add_child(wall)
 

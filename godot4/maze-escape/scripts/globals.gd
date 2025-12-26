@@ -1,5 +1,9 @@
 extends Node
 
+# ----- GAME CONFIG -----
+var tile_size: int = 32
+var current_level := 1
+
 enum GameState { NONE, PLAYING, WIN, LOSE }
 
 signal game_state_changed(state)
@@ -11,6 +15,7 @@ func emit_treasure_collected():
 	emit_signal("treasure_collected")
 
 func emit_player_died():
+	set_game_state(GameState.LOSE)
 	emit_signal("player_died")
 
 # ----- LEVEL FLOW -----
@@ -71,8 +76,3 @@ func _change_scene_async(path: String) -> void:
 
 	var packed_scene: PackedScene = ResourceLoader.load_threaded_get(path)
 	get_tree().change_scene_to_packed(packed_scene)
-
-
-# ----- GAME CONFIG -----
-var tile_size: int = 64
-var current_level := 1

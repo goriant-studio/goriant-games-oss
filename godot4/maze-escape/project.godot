@@ -20,11 +20,12 @@ config/icon="res://icon.svg"
 Globals="*res://scripts/globals.gd"
 MusicManager="*res://scripts/music_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
+Utils="*res://scripts/utils.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [input]
@@ -59,8 +60,12 @@ move_down={
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=false
 
+[physics]
+
+common/physics_ticks_per_second=30
+
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+2d/snap/snap_2d_transforms_to_pixel=true

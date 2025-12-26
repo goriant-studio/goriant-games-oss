@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+signal player_hit(enemy: Enemy, player: Node2D)
+signal hit_player
 enum PatrolMode { HORIZONTAL, VERTICAL }
 
 # --------- CONFIG (chỉ thay data) ----------
@@ -13,65 +15,82 @@ enum PatrolMode { HORIZONTAL, VERTICAL }
 # --------- REQUIRED NODES ----------
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $Hitbox
-@onready var collision: CollisionShape2D = $Hitbox/CollisionShape2D
+@onready var hitbox_collision: CollisionShape2D = $Hitbox/CollisionShape2D
+@onready var body_collision: CollisionShape2D = $CollisionShape2D
 
-var direction := -1
-var has_hit_player := false
+var game_ui: CanvasLayer = null
+var direction: int = -1
+var has_hit_player: bool = false
 var hit_sfx: AudioStreamPlayer2D
 
-func _ready():
+func _ready() -> void:
 	assert(sprite != null, "Enemy requires Sprite2D")
-	assert(collision != null, "Enemy requires CollisionShape2D")
+	assert(hitbox != null, "Enemy requires Hitbox (Area2D)")
+	assert(hitbox_collision != null, "Enemy requires CollisionShape2D")
+
 	_init_hit_sfx()
-	hitbox.body_entered.connect(_on_hitbox_body_entered)
+
+	hitbox.add_to_group("enemy_hitbox")
+	if not hitbox.area_entered.is_connected(_on_hitbox_area_entered):
+		hitbox.area_entered.connect(_on_hitbox_area_entered)
 	apply_sprite()
 	setup_collision()
 	
-	
-func _on_hitbox_body_entered(body: Node2D):
-	if Globals.game_state != Globals.GameState.PLAYING:
+
+func _on_hitbox_area_entered(body: Node2D) -> void:
+	# Chỉ hit player
+	if not body.is_in_group("player_hurtbox"):
 		return
 		
-	if body.is_in_group("player") and not has_hit_player:
-		if has_hit_player:
-			return
-		has_hit_player = true
-		
-		if hit_sfx:
-			print("Hit sfx existsd")
-			hit_sfx.play()
-		Globals.set_game_state(Globals.GameState.LOSE)
-		
+	print("ENTER player ✅ state=%s hit=%s" % [Globals.game_state, has_hit_player])		
 
+	# Chặn hit lặp
+	if has_hit_player:
+		return
+	has_hit_player = true
 
-func _init_hit_sfx():
+	print("Enemy hit player event trigger")
+	emit_signal("hit_player")
+
+func _init_hit_sfx() -> void:
 	hit_sfx = AudioStreamPlayer2D.new()
 	hit_sfx.stream = preload("res://assets/audio/enemy-hit.wav")
 	hit_sfx.process_mode = Node.PROCESS_MODE_ALWAYS
+	# hit_sfx.bus = "SFX" # nếu bạn có bus
 	add_child(hit_sfx)
 
-func apply_sprite():
+func apply_sprite() -> void:
 	assert(sprite_texture != null, "Enemy sprite_texture is required")
 	sprite.texture = sprite_texture
+	sprite.apply_scale(Vector2(0.05, 0.05))
 
-func setup_collision():
+func setup_collision() -> void:
+	var body_shape := RectangleShape2D.new()
+	body_shape.size = Vector2(Globals.tile_size * 1.1, Globals.tile_size * 1.1)
+	body_collision.shape = body_shape
+	
+	# Body (CharacterBody2D) collide với world và enemies (nếu muốn push nhau)
+	self.collision_layer = Utils.layer(3)  # layer 3: Enemies
+	self.collision_mask = Utils.layer(0)   # go through wall
+	
 	var shape := RectangleShape2D.new()
-	shape.size = Vector2(
-		Globals.tile_size * 0.9,
-		Globals.tile_size * 0.9
-	)
-	collision.shape = shape
-	collision_layer = 3
-	collision_mask = 2
+	shape.size = Vector2(Globals.tile_size * 1.1, Globals.tile_size * 1.1)
+	hitbox_collision.shape = shape
+	
+	hitbox.collision_layer = Utils.layer(5) 	# enemy hit box on layer 5
+	hitbox.collision_mask = Utils.layer(4) 		# detect player hurt box on layer 4
+	
+	body_collision.disabled = false
+	hitbox_collision.disabled = false
+	print("Body shape:", body_collision.shape)
+	print("Body disabled:", body_collision.disabled)
 
-
-func _physics_process(_delta):
-
+func _physics_process(_delta: float) -> void:
 	velocity = Vector2.ZERO
 
-	var start_pos = patrol_start * Globals.tile_size
-	var end_pos = patrol_end * Globals.tile_size
-	
+	var start_pos := patrol_start * Globals.tile_size
+	var end_pos := patrol_end * Globals.tile_size
+
 	match patrol_mode:
 		PatrolMode.HORIZONTAL:
 			velocity.x = direction * speed

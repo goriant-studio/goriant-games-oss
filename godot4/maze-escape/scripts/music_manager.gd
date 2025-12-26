@@ -3,7 +3,7 @@ extends Node
 signal audio_ready
 
 const MUSIC_BUS_NAME := "Master"
-const DEFAULT_VOLUME_DB := 0.0
+const DEFAULT_VOLUME_DB := -12
 
 var bgm: AudioStreamPlayer
 var audio_unlocked := false
