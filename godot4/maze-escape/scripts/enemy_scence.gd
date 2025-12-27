@@ -98,8 +98,6 @@ func setup_collision() -> void:
 	
 	body_collision.disabled = false
 	hitbox_collision.disabled = false
-	print("Body shape:", body_collision.shape)
-	print("Body disabled:", body_collision.disabled)
 
 func _physics_process(_delta: float) -> void:
 	velocity = Vector2.ZERO

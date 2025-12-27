@@ -23,6 +23,7 @@ var levels := [
 	"res://scenes/level/level_1.tscn",
 	"res://scenes/level/level_2.tscn",
 	"res://scenes/level/level_3.tscn",
+	"res://scenes/level/level_4.tscn",
 ]
 
 var current_level_index := 0
