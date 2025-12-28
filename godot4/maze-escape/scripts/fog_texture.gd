@@ -1,7 +1,7 @@
 extends Sprite2D
 
 @export var target_tilemap_path: NodePath
-@export var fog_color := Color(0, 0, 0, 0.99)
+@export var fog_color := Color(0, 0, 0, 0.93)
 @export var reveal_radius := 56.0
 
 # Performance

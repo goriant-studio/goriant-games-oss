@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3rjq13hqwfae"]
+
+[ext_resource type="Script" uid="uid://sedce3j62wsp" path="res://scenes/level/level_canvas.gd" id="1_28vyx"]
+
+[node name="LevelCanvas" type="CanvasLayer"]
+script = ExtResource("1_28vyx")
+level = "1"
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 123.0
+offset_bottom = 47.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 113.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 30
+text = "Level 4"

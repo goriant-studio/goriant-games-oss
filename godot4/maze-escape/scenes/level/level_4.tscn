@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://bulrdrphp1uyq"]
+[gd_scene load_steps=16 format=4 uid="uid://bulrdrphp1uyq"]
 
 [ext_resource type="Texture2D" uid="uid://dhhto8qdl7wvu" path="res://assets/maze-lv2.png" id="1_8xdx5"]
-[ext_resource type="Script" uid="uid://b1am0eahfmyir" path="res://scenes/level/fog_texture.gd" id="1_iidsb"]
+[ext_resource type="Script" uid="uid://b1am0eahfmyir" path="res://scripts/fog_texture.gd" id="1_iidsb"]
 [ext_resource type="PackedScene" uid="uid://c8g8d10tvfk8e" path="res://scenes/treasure.tscn" id="3_sfm1i"]
 [ext_resource type="PackedScene" uid="uid://b5qwhlttc1nlg" path="res://scenes/enemy.tscn" id="4_522ui"]
 [ext_resource type="Texture2D" uid="uid://o1ek52farxtg" path="res://assets/enemy.png" id="5_avmj5"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cvy6vu5y8xtcn" path="res://scenes/player_with_light.tscn" id="9_8xdx5"]
 [ext_resource type="Texture2D" uid="uid://cjj5r0xe7y2yi" path="res://assets/enemy2.png" id="9_57wb1"]
 [ext_resource type="PackedScene" uid="uid://d23hdvhnwauum" path="res://scenes/game_ui.tscn" id="10_ve5jy"]
+[ext_resource type="PackedScene" uid="uid://c3rjq13hqwfae" path="res://scenes/level/level_canvas.tscn" id="11_sfm1i"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_io4i7"]
 tile_data = PackedInt32Array(0, 1245184, 3)
@@ -1185,19 +1186,8 @@ offset_bottom = 49.0
 theme_override_font_sizes/font_size = 20
 text = "I love you Louis & Andy"
 
-[node name="LevelCanvas" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="Panel" parent="LevelCanvas"]
-offset_right = 123.0
-offset_bottom = 47.0
-
-[node name="Label" type="Label" parent="LevelCanvas"]
-offset_left = 13.0
-offset_top = 3.0
-offset_right = 113.0
-offset_bottom = 45.0
-theme_override_font_sizes/font_size = 30
-text = "Level 4"
+[node name="LevelCanvas" parent="." instance=ExtResource("11_sfm1i")]
+level = "4"
 
 [node name="GameUI" parent="." instance=ExtResource("10_ve5jy")]
 layer = 2

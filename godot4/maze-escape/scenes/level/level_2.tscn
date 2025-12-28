@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://st7j4rwd5c0p"]
+[gd_scene load_steps=15 format=4 uid="uid://st7j4rwd5c0p"]
 
 [ext_resource type="Texture2D" uid="uid://dhhto8qdl7wvu" path="res://assets/maze-lv2.png" id="1_dmexl"]
 [ext_resource type="PackedScene" uid="uid://bajcb45511uht" path="res://scenes/player.tscn" id="2_8cim8"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://8ldupkdkiuvx" path="res://assets/enemy4.png" id="8_liyy4"]
 [ext_resource type="PackedScene" uid="uid://d23hdvhnwauum" path="res://scenes/game_ui.tscn" id="9_lvcdb"]
 [ext_resource type="Texture2D" uid="uid://cjj5r0xe7y2yi" path="res://assets/enemy2.png" id="10_io4i7"]
+[ext_resource type="PackedScene" uid="uid://c3rjq13hqwfae" path="res://scenes/level/level_canvas.tscn" id="11_io4i7"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_io4i7"]
 tile_data = PackedInt32Array(0, 1245184, 3)
@@ -1154,7 +1155,10 @@ patrol_end = 15
 position = Vector2(2101, 929)
 
 [node name="TreasureTest" parent="." instance=ExtResource("3_8lyp7")]
+visible = false
 position = Vector2(-20.999756, 377.00006)
+monitoring = false
+monitorable = false
 
 [node name="GameUI" parent="." instance=ExtResource("9_lvcdb")]
 visible = false
@@ -1173,3 +1177,6 @@ offset_right = 240.0
 offset_bottom = 49.0
 theme_override_font_sizes/font_size = 20
 text = "I love you Louis & Andy"
+
+[node name="LevelCanvas" parent="." instance=ExtResource("11_io4i7")]
+level = "2"
