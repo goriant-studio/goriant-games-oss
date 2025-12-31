@@ -1169,7 +1169,7 @@ patrol_start = 1
 patrol_end = 15
 
 [node name="Treasure" parent="." instance=ExtResource("3_sfm1i")]
-position = Vector2(2101, 929)
+position = Vector2(-94, 494)
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 571.0
