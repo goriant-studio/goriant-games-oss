@@ -26,7 +26,7 @@ var revealed_grid := {}  # Dictionary<Vector2i, bool>
 const TRANSPARENT := Color(0, 0, 0, 0)
 
 func _ready() -> void:
-	z_index = 999999
+	z_index = 999
 	centered = false
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 

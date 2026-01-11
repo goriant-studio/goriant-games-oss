@@ -48,7 +48,8 @@ func _on_hitbox_area_entered(body: Area2D):
 			hit_sfx.play()
 		
 		velocity = Vector2.ZERO
-		Globals.emit_player_died()
+		if Globals.game_state == Globals.GameState.PLAYING:
+			Globals.emit_player_died()
 		
 
 func _init_hit_sfx():

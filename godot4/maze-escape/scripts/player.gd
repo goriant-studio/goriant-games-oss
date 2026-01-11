@@ -49,4 +49,5 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		
 	print("💀 Player died")
 	velocity = Vector2.ZERO
-	Globals.emit_player_died()
+	if Globals.game_state == Globals.GameState.PLAYING:
+		Globals.emit_player_died()

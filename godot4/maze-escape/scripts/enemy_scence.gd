@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Enemy
 
-signal player_hit(enemy: Enemy, player: Node2D)
 signal hit_player
 enum PatrolMode { HORIZONTAL, VERTICAL }
 

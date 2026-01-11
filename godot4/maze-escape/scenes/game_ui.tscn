@@ -32,7 +32,22 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 100
-text = "Restart Game"
+text = "Restart Level"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07394765
+anchor_top = 0.56823266
+anchor_right = 0.8339022
+anchor_bottom = 0.89261746
+offset_right = 32.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
 metadata/_edit_use_anchors_ = true
 
 [node name="NextButton" type="Button" parent="Panel"]

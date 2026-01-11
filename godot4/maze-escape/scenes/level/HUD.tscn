@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3rjq13hqwfae"]
+
+[ext_resource type="Script" uid="uid://sedce3j62wsp" path="res://scenes/level/level_canvas.gd" id="1_28vyx"]
+[ext_resource type="PackedScene" uid="uid://dfg4ty5cm8ths" path="res://scenes/fullscreen_button.tscn" id="2_3sf7l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf6vl"]
+bg_color = Color(0.8641023, 0.48574156, 0.290291, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6u6jc"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_28vyx")
+level = "1"
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 304.0
+offset_top = 23.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qf6vl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel2"]
+material = SubResource("CanvasItemMaterial_6u6jc")
+layout_mode = 0
+offset_left = -302.0
+offset_top = -21.0
+offset_right = 81.0
+offset_bottom = 21.0
+theme_override_constants/separation = 10
+
+[node name="LevelLabel" type="Label" parent="Panel2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Level 4"
+
+[node name="FullscreenButton" parent="Panel2/HBoxContainer" instance=ExtResource("2_3sf7l")]
+position = Vector2(-172, -67)
+
+[node name="PlayerLifeLabel" type="Label" parent="Panel2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Life 10"
+
+[node name="ColorRect" type="ColorRect" parent="Panel2"]
+layout_mode = 0
+offset_left = -302.0
+offset_top = -21.0
+offset_right = -61.0
+offset_bottom = 21.0
+size_flags_horizontal = 3
+color = Color(0.97723854, 0.900297, 0.16409835, 0.44200003)

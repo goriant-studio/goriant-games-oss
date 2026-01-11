@@ -1,35 +1,96 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi5vfb05t4ry8"]
+[gd_scene load_steps=5 format=3 uid="uid://bi5vfb05t4ry8"]
 
+[ext_resource type="Texture2D" uid="uid://d0oe6glnuafx5" path="res://assets/tile_maze.png" id="1_0rdsr"]
 [ext_resource type="Script" uid="uid://bv2340k18qvq1" path="res://scripts/main_menu.gd" id="1_1oj5k"]
+[ext_resource type="Texture2D" uid="uid://o1ek52farxtg" path="res://assets/enemy.png" id="1_72e8q"]
+[ext_resource type="AudioStream" uid="uid://b4n2wlc88ubnj" path="res://assets/audio/scary.mp3" id="3_d2op2"]
 
 [node name="MainGame" type="Node2D"]
 
-[node name="MainMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("start_btn", "quit_btn")]
-script = ExtResource("1_1oj5k")
-start_btn = NodePath("StartButton")
-quit_btn = NodePath("QuitButton")
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65000004)
+offset_top = -31.0
+offset_right = 1357.0
+offset_bottom = 760.0
+texture = ExtResource("1_0rdsr")
 
-[node name="Label" type="Label" parent="MainMenu"]
-offset_left = 321.0
-offset_top = 165.0
-offset_right = 935.0
-offset_bottom = 302.0
-theme_override_font_sizes/font_size = 100
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(133.75, 180.75)
+scale = Vector2(0.100097656, 0.10595703)
+texture = ExtResource("1_72e8q")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d2op2")
+volume_db = -26.0
+
+[node name="MenuCard" type="CenterContainer" parent="." node_paths=PackedStringArray("start_btn", "difficult_opt")]
+z_index = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("1_1oj5k")
+start_btn = NodePath("VBoxContainer2/MenuCard2/VBoxContainer/PlayBtn")
+difficult_opt = NodePath("VBoxContainer2/MenuCard2/VBoxContainer/HBoxContainer/OptionButton")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MenuCard"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MenuCard" type="PanelContainer" parent="MenuCard/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuCard/VBoxContainer2/MenuCard"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MenuCard/VBoxContainer2/MenuCard/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 140
 text = "Maze Escape"
 
-[node name="StartButton" type="Button" parent="MainMenu"]
-offset_left = 431.0
-offset_top = 370.0
-offset_right = 831.0
-offset_bottom = 490.0
-theme_override_font_sizes/font_size = 80
-text = "Start"
+[node name="Label2" type="Label" parent="MenuCard/VBoxContainer2/MenuCard/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Dodge the Ghost"
+horizontal_alignment = 1
 
-[node name="QuitButton" type="Button" parent="MainMenu"]
-offset_left = 430.0
-offset_top = 545.0
-offset_right = 830.0
-offset_bottom = 665.0
+[node name="MarginContainer" type="MarginContainer" parent="MenuCard/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="MenuCard2" type="PanelContainer" parent="MenuCard/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuCard/VBoxContainer2/MenuCard2"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PlayBtn" type="Button" parent="MenuCard/VBoxContainer2/MenuCard2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "Play"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuCard/VBoxContainer2/MenuCard2/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuCard/VBoxContainer2/MenuCard2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 80
-text = "Quit
-"
+text = "Difficult"
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuCard/VBoxContainer2/MenuCard2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 50
+
+[node name="OptionButton" type="OptionButton" parent="MenuCard/VBoxContainer2/MenuCard2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+alignment = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2

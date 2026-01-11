@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://o1ek52farxtg" path="res://assets/enemy.png" id="6_n0qek"]
 [ext_resource type="Texture2D" uid="uid://mqvp62gyglq2" path="res://assets/enemy3.png" id="7_rpv7v"]
 [ext_resource type="PackedScene" uid="uid://d23hdvhnwauum" path="res://scenes/game_ui.tscn" id="9_0qnps"]
-[ext_resource type="PackedScene" uid="uid://c3rjq13hqwfae" path="res://scenes/level/level_canvas.tscn" id="9_fit3x"]
+[ext_resource type="PackedScene" uid="uid://c3rjq13hqwfae" path="res://scenes/level/HUD.tscn" id="9_fit3x"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_dara0"]
 tile_data = PackedInt32Array(0, 327680, 5)
@@ -571,9 +571,6 @@ position = Vector2(144, 407)
 monitoring = false
 monitorable = false
 
-[node name="GameUI" parent="." instance=ExtResource("9_0qnps")]
-visible = false
-
 [node name="Entities" type="Node" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("2_mlldt")]
@@ -611,5 +608,6 @@ speed = 30.0
 patrol_start = -2
 patrol_end = 2
 
-[node name="LevelCanvas" parent="." instance=ExtResource("9_fit3x")]
-level = "3"
+[node name="HUD" parent="." instance=ExtResource("9_fit3x")]
+
+[node name="GameUI" parent="." instance=ExtResource("9_0qnps")]
